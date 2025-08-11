@@ -1,0 +1,50 @@
+[
+  {
+    "name": "KMH",
+    "score": 6,
+    "mode": "TIME_ATTACK",
+    "time": 74
+  },
+  {
+    "name": "KMH",
+    "score": 4,
+    "mode": "TIME_ATTACK",
+    "time": 60
+  },
+  {
+    "name": "KMH",
+    "score": 3,
+    "mode": "TIME_ATTACK",
+    "time": 60
+  },
+  {
+    "name": "MASTER",
+    "score": 0,
+    "mode": "TIME_ATTACK",
+    "time": 0
+  },
+  {
+    "name": "EXPERT",
+    "score": 0,
+    "mode": "TIME_ATTACK",
+    "time": 0
+  },
+  {
+    "name": "PLAYER",
+    "score": 0,
+    "mode": "TIME_ATTACK",
+    "time": 0
+  },
+  {
+    "name": "ROOKIE",
+    "score": 0,
+    "mode": "TIME_ATTACK",
+    "time": 0
+  },
+  {
+    "name": "NEWBIE",
+    "score": 0,
+    "mode": "TIME_ATTACK",
+    "time": 0
+  }
+]
