@@ -34,18 +34,8 @@
 4. 게임 모드 선택 후 플레이 시작
 
 ### OpenAI API 키 설정 (권장)
-- `.env.example`을 복사해서 `.env` 파일 생성
-- 실제 OpenAI API 키 입력
+- `env.txt` 파일에 실제 OpenAI API 키 입력
 - 게임 실행 시 자동으로 로드됨
-
-```bash
-cp .env.example .env
-# .env 파일에 실제 API 키 입력
-```
-
-### 수동 입력 방식
-- 게임 시작 전 메뉴에서 직접 API 키 입력
-- 브라우저에 저장되지 않음 (새로고침 시 재입력 필요)
 
 ### 필수 요구사항
 - 최신 브라우저 (Chrome, Firefox, Safari 등)
@@ -182,34 +172,70 @@ setInterval(loadGlobalLeaderboard, 5000); // 5초마다 갱신
 
 **권장**: 행사나 다중 플레이어 환경에서는 **Realtime ON**, 개인 플레이에서는 **폴링**으로 충분합니다.
 
----
+## 🎯 단어 데이터베이스
 
-# 🧭 Project Context — VoiceTaboo Web + Supabase Integration
+현재 103개의 엄선된 단어가 포함되어 있으며, 각 단어마다 브랜드명과 핵심 키워드가 금지어로 설정되어 있습니다.
 
-## 🎯 목적
+### 새로운 단어 추가
+`data/words.json` 파일을 편집하여 새로운 목표어와 금지어를 추가할 수 있습니다:
 
-PyGame 기반의 "Voice Taboo" 프로젝트를 **정적 웹 버전으로 이식**하고,
-플레이어 점수를 **Supabase 데이터베이스에 저장 및 공유**하기 위한 백엔드 최소화 구성.
+```json
+{"target": "새로운단어", "forbidden": ["금지어1", "금지어2", "금지어3"]}
+```
 
-> 로그인 없이도 점수 저장/조회가 가능한 **익명 공개 리더보드** 구축이 목표.
+## 🔧 확장 기능
 
----
+### OpenAI API 연동 (선택사항)
+현재는 간단한 키워드 매칭을 사용하지만, OpenAI API를 연동하여 더 정확한 AI 추측을 구현할 수 있습니다.
 
-## ⚙️ 현재까지 완료된 Supabase 설정
+`index.html`의 `simpleGuess` 함수를 다음으로 교체:
 
-### ✅ 1. Database Table: `leaderboard`
+```javascript
+// OpenAI API integration placeholder
+async function simpleGuess(history) {
+    try {
+        const response = await fetch('/api/whisper', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ history: history })
+        });
+        const data = await response.json();
+        return data.reply;
+    } catch (error) {
+        console.error('API call failed:', error);
+        return "API 호출 실패. [[모름]]";
+    }
+}
+```
 
-**Table schema (public.leaderboard):**
+## 🐛 문제 해결
 
-| Column        | Type                    | Default    | Note                     |
-| ------------- | ----------------------- | ---------- | ------------------------ |
-| `id`          | `int8` (auto increment) | —          | Primary key              |
-| `created_at`  | `timestamptz`           | `now()`    | Auto timestamp           |
-| `game_name`   | `text`                  | —          | 게임 이름 (`voice_taboo`) |
-| `game_mode`   | `text`                  | —          | 게임 모드 (`TIME_ATTACK`, `SPEED_RUN`) |
-| `score`       | `int4`                  | —          | 점수 (TIME_ATTACK: 단어 수, SPEED_RUN: 시간) |
-| `device_id`   | `text`                  | —          | 고유 장치 UUID               |
-| `player_name` | `text`                  | `'Player'` | 플레이어 표시 이름               |
+### 음성 인식 권한 문제
+- 브라우저에서 마이크 권한을 허용했는지 확인
+- HTTPS 환경에서 실행 (localhost 포함)
+- 권한이 거부되었을 경우 브라우저 설정에서 재설정
+
+### OpenAI API 오류
+- API 키가 올바른지 확인 (`sk-`로 시작하는지)
+- API 사용량 한도를 초과하지 않았는지 확인
+- 네트워크 연결 상태 확인
+
+### 데이터 로드 실패
+- `data/words.json` 파일 존재 확인
+- CORS 정책 확인 (로컬 파일의 경우 브라우저 제한 있을 수 있음)
+
+### 기타 브라우저 호환성
+- Chrome 브라우저 권장 (Web Speech API 지원 최적)
+- 최신 브라우저 버전 사용
+
+## 📄 라이선스
+
+이 프로젝트는 MIT 라이선스 하에 배포됩니다.
+
+## ⚠️ 보안 주의사항
+
+- Web Speech API는 클라이언트 사이드에서 실행되므로 민감한 데이터 처리 시 주의
+- OpenAI API 연동 시 API 키 노출 방지
 
 ---
 

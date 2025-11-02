@@ -1,0 +1,38 @@
+[
+  {
+    "name": "KMH",
+    "score": 7,
+    "mode": "SPEED_RUN",
+    "time": 139
+  },
+  {
+    "name": "MASTER",
+    "score": 0,
+    "mode": "SPEED_RUN",
+    "time": 0
+  },
+  {
+    "name": "EXPERT",
+    "score": 0,
+    "mode": "SPEED_RUN",
+    "time": 0
+  },
+  {
+    "name": "PLAYER",
+    "score": 0,
+    "mode": "SPEED_RUN",
+    "time": 0
+  },
+  {
+    "name": "ROOKIE",
+    "score": 0,
+    "mode": "SPEED_RUN",
+    "time": 0
+  },
+  {
+    "name": "NEWBIE",
+    "score": 0,
+    "mode": "SPEED_RUN",
+    "time": 0
+  }
+]

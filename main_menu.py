@@ -7,6 +7,7 @@ import random
 import time
 import pygame
 from config import WINDOW_W, WINDOW_H
+import korcen
 
 
 class MainMenu:
@@ -107,8 +108,14 @@ class MainMenu:
         """이름 입력 처리"""
         if key == pygame.K_RETURN:
             if len(self.player_name.strip()) >= 1:
-                self.name_input_active = False
-                return "START_GAME_WITH_NAME"
+                # 비속어 체크
+                if hasattr(korcen, 'bad_words') and self.player_name.lower() in [word.lower() for word in korcen.bad_words]:
+                    # 비속어이면 입력 초기화
+                    self.player_name = ""
+                    return None
+                else:
+                    self.name_input_active = False
+                    return "START_GAME_WITH_NAME"
         elif key == pygame.K_ESCAPE:
             self.name_input_active = False
             self.player_name = ""

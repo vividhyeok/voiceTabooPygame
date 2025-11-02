@@ -1,0 +1,1 @@
+http://172.20.16.170:8000/games/doodle-vgc/mobile-game.html

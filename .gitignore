@@ -3,6 +3,7 @@
 .env.local
 .env.*.local
 *.env
+env.txt  # 로컬 개발용 환경변수 파일
 
 # OpenAI API 키 관련
 openai_key.txt
